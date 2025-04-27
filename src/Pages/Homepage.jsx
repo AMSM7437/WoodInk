@@ -3,6 +3,7 @@ import "../App.css";
 import { useGetBook } from "../repo/mainRepo";
 import { useNavigate } from "react-router-dom";
 import { RiVolumeMuteLine, RiVolumeUpLine } from "@remixicon/react";
+import BookGrid from "../components/bookGrid";
 
 export const Homepage = () => {
   const navigate = useNavigate();
@@ -26,9 +27,9 @@ export const Homepage = () => {
     if (searchQuery.trim() !== "") {
       setDataToPost(searchQuery.trim());
       setEnable(true);
-      console.log("this is the submit button ");
     }
   };
+
   useEffect(() => {
     // when the audio metadata is loaded, set volume to 30%
     const audioEl = audioRef.current;
@@ -41,11 +42,6 @@ export const Homepage = () => {
       audioEl.removeEventListener("loadedmetadata", onLoaded);
     };
   }, []);
-
-  useEffect(() => {
-    console.log("data", data);
-    setEnable(false);
-  }, [data]);
 
   return (
     <div
@@ -128,10 +124,15 @@ export const Homepage = () => {
             </form>
           </div>
         </section>
+
+        <div style={{ width: "80vw", minHeight: "40vh" }}>
+          {isFetching && <p className="loading">Loading results...</p>}
+          {data?.docs && !isFetching && <BookGrid data={data.docs} />}
+        </div>
       </main>
 
       <footer className="footer">
-        <p>Made with ❤️ for book lovers.</p>
+        <p>Made with ❤️</p>
       </footer>
     </div>
   );
