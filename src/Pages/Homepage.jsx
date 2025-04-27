@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { useGetBook } from "../repo/mainRepo";
+import BookGrid from "../components/bookGrid";
 
 export const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,17 +15,17 @@ export const Homepage = () => {
   };
 
   const handleSubmit = () => {
-    if (searchQuery !== "") {
-      setDataToPost(searchQuery);
+    if (searchQuery.trim() !== "") {
+      setDataToPost(searchQuery.trim());
       setEnable(true);
-      console.log("this is the submit button ");
     }
   };
 
-  useEffect(() => {
-    console.log("data", data);
-    setEnable(false);
-  }, [data]);
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
 
   return (
     <div className="app">
@@ -49,6 +50,7 @@ export const Homepage = () => {
               className="searchInput"
               value={searchQuery}
               onChange={handleInputChange}
+              onKeyDown={handleKeyPress} // <-- support Enter key
             />
             <button
               type="button"
@@ -59,10 +61,15 @@ export const Homepage = () => {
             </button>
           </div>
         </section>
+
+        <div style={{ width: "80vw", minHeight: "40vh" }}>
+          {isFetching && <p className="loading">Loading results...</p>}
+          {data?.docs && !isFetching && <BookGrid data={data.docs} />}
+        </div>
       </main>
 
       <footer className="footer">
-        <p>Made with ❤️ for book lovers.</p>
+        <p>Made with ❤️</p>
       </footer>
     </div>
   );
