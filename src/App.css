@@ -1,19 +1,64 @@
+/* ==== FONTS ==== */
+@font-face {
+  font-family: "Playfair Display";
+  src: url("./fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900; /* For variable fonts, specify range */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Italic EB Garamond";
+  src: url("./fonts/EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: italic; /* This is an italic variant */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("./fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dancing Script";
+  src: url("./fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 400 700; /* Dancing Script's weight range */
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-background: #faf2e0; /* Soft warm background */
-  --color-primary: #8b5e3c;  /* Cozy brown */
-  --color-secondary: #4e6b49;  /* Elegant forest green */
+  --color-primary: #8b5e3c; /* Cozy brown */
+  --color-secondary: #4e6b49; /* Elegant forest green */
   --color-accent: #d1a15e; /* Muted amber for warmth */
   --color-cream: #fff4e6; /* Soft cream */
   --color-text: #3d3d3d; /* Dark text for good readability */
   --color-light-text: #7a7a7a; /* Light gray for secondary text */
-  --font-title: 'Merriweather', serif; /* Elegant serif for headings */
-  --font-body: 'Poppins', sans-serif; /* Clean, modern sans-serif for body */
+  --color-dark-background: #1a1a1a;
+
+  --font-title: "Merriweather", serif; /* Elegant serif for headings */
+  --font-body: "Playfair Display", sans-serif; /* Clean, modern sans-serif for body */
+
+  --font-eb-garamond: "EB Garamond";
+  --font-dancing-script: "Dancing Script";
+  --font-playfair-display: "Playfair Display";
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
+  appearance: unset;
 }
 
 body {
@@ -21,18 +66,34 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.6;
-
 }
 
 .app {
   display: flex;
+  position: relative;
   flex-direction: column;
   min-height: 100vh;
   min-width: 100vw;
 }
+.app::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./assets/Library.jpg"); /* Replace with your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* This keeps it fixed while scrolling */
+  z-index: -1; /* Places it behind other content */
+}
 
 .header {
-  background-color: var(--color-primary);
+  border-radius: 12px;
+  margin: 10px 32px;
+  background-color: rgba(139, 94, 60, 0.7);
   padding: 1.5rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -42,8 +103,9 @@ body {
 }
 
 .logo {
-  font-family: var(--font-title);
+  font-family: "Playfair Display";
   font-size: 2.2rem;
+  user-select: none;
 }
 
 .nav a {
@@ -61,9 +123,9 @@ body {
 .main {
   flex: 1;
   padding: 2rem;
-  background-color: var(--color-cream);
+  background-color: rgba(255, 244, 230, 0);
   border-radius: 12px;
-  margin: 2rem;
+  /* margin: 2rem; */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -76,31 +138,56 @@ body {
 }
 
 .hero h2 {
-  font-family: var(--font-title);
+  font-family: var(--font-eb-garamond);
   font-size: 3rem;
   color: var(--color-primary);
   margin-bottom: 1rem;
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--color-secondary);
+  font-family: var(--font-dancing-script);
   margin-bottom: 2rem;
+}
+.audioIcon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .searchInput {
   padding: 1rem 2rem;
   width: 60%;
   max-width: 450px;
-  border: 2px solid var(--color-secondary);
-  border-radius: 8px;
+  border: 3px solid var(--color-primary);
+  border-radius: 16px 0px 0px 16px;
   font-size: 1.1rem;
+  font-family: var(--font-eb-garamond);
   outline: none;
-  transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.2s ease-in-out;
+  background-color: var(--color-dark-background);
+  color: var(--color-cream);
 }
 
 .searchInput:focus {
-  border-color: var(--color-accent);
+  border-color: var(--color-secondary);
+}
+.searchButton {
+  margin: 0px 5px;
+  border: 0px;
+  border: 3px solid var(--color-primary);
+  font-family: var(--font-eb-garamond);
+  border-radius: 0px 16px 16px 0px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  color: var(--color-cream);
+  font-weight: lighter;
+  background-color: var(--color-dark-background);
+  transition: border-color 0.2s ease-in-out;
+}
+.searchButton:hover {
+  border-color: var(--color-secondary);
 }
 
 .about {
