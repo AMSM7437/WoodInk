@@ -12,8 +12,9 @@ export const Homepage = () => {
   const [dataToPost, setDataToPost] = useState("");
   const [enable, setEnable] = useState(false);
   const [toggleMusic, setToggleMusic] = useState(false);
+  const [pagination, setPagination] = useState({ pageIndex: 2, pageSize: 5 });
 
-  const { data, isFetching } = useGetBook(dataToPost, enable);
+  const { data, isFetching } = useGetBook(dataToPost, pagination, enable);
 
   const audioRef = useRef(null);
 
@@ -44,20 +45,7 @@ export const Homepage = () => {
   }, []);
 
   return (
-    <div
-      className="app"
-      style={{
-        zIndex: 1000,
-        position: "relative",
-        minHeight: "100vh",
-        width: "100%",
-        backgroundImage: "url(../assets/CoffeeBackground.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-      }}
-    >
+    <div className="app">
       <div className="audioIcon">
         {!toggleMusic && (
           <RiVolumeMuteLine
