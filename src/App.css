@@ -1,5 +1,41 @@
+/* ==== FONTS ==== */
+@font-face {
+  font-family: "Playfair Display";
+  src: url("./fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900; /* For variable fonts, specify range */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Italic EB Garamond";
+  src: url("./fonts/EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: italic; /* This is an italic variant */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("./fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dancing Script";
+  src: url("./fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 400 700; /* Dancing Script's weight range */
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* Colors */
   --color-background: #faf2e0; /* Soft warm background */
   --color-primary: #8b5e3c; /* Cozy brown */
   --color-secondary: #4e6b49; /* Elegant forest green */
@@ -7,16 +43,22 @@
   --color-cream: #fff4e6; /* Soft cream */
   --color-text: #3d3d3d; /* Dark text for good readability */
   --color-light-text: #7a7a7a; /* Light gray for secondary text */
+  --color-dark-background: #1a1a1a;
 
-  /* Fonts */
-  --font-title: "Merriweather", serif;
-  --font-body: "Poppins", sans-serif;
+  --font-title: "Merriweather", serif; /* Elegant serif for headings */
+  --font-body: "Playfair Display", sans-serif; /* Clean, modern sans-serif for body */
+
+  --font-eb-garamond: "EB Garamond";
+  --font-dancing-script: "Dancing Script";
+  --font-playfair-display: "Playfair Display";
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
+  appearance: unset;
 }
 
 body {
@@ -24,19 +66,34 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.6;
-  min-height: 100vh;
 }
 
 .app {
   display: flex;
+  position: relative;
   flex-direction: column;
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: 100dvh;
+  min-width: 100dvw;
+}
+.app::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./assets/Library.jpg"); /* Replace with your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* This keeps it fixed while scrolling */
+  z-index: -1; /* Places it behind other content */
 }
 
-/* Header */
 .header {
-  background-color: var(--color-primary);
+  border-radius: 12px;
+  margin: 10px 32px;
+  background-color: rgba(139, 94, 60, 0.7);
   padding: 1.5rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -46,8 +103,9 @@ body {
 }
 
 .logo {
-  font-family: var(--font-title);
+  font-family: "Playfair Display";
   font-size: 2.2rem;
+  user-select: none;
 }
 
 .nav a {
@@ -62,55 +120,76 @@ body {
   color: var(--color-accent);
 }
 
-/* Main Content */
 .main {
   flex: 1;
   padding: 2rem;
-  background-color: var(--color-cream);
+  background-color: rgba(255, 244, 230, 0);
   border-radius: 12px;
-  margin: 2rem;
+  /* margin: 2rem; */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Hero Section */
 .hero {
   background-color: var(--color-background);
-  padding: 4rem 2rem;
+  padding: 4rem;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
 }
 
 .hero h2 {
-  font-family: var(--font-title);
+  font-family: var(--font-eb-garamond);
   font-size: 3rem;
   color: var(--color-primary);
   margin-bottom: 1rem;
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--color-secondary);
+  font-family: var(--font-dancing-script);
   margin-bottom: 2rem;
+}
+.audioIcon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .searchInput {
   padding: 1rem 2rem;
   width: 60%;
   max-width: 450px;
-  border: 2px solid var(--color-secondary);
-  border-radius: 8px;
+  border: 3px solid var(--color-primary);
+  border-radius: 16px 0px 0px 16px;
   font-size: 1.1rem;
+  font-family: var(--font-eb-garamond);
   outline: none;
-  transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.2s ease-in-out;
+  background-color: var(--color-dark-background);
+  color: var(--color-cream);
 }
 
 .searchInput:focus {
-  border-color: var(--color-accent);
+  border-color: var(--color-secondary);
+}
+.searchButton {
+  margin: 0px 5px;
+  border: 0px;
+  border: 3px solid var(--color-primary);
+  font-family: var(--font-eb-garamond);
+  border-radius: 0px 16px 16px 0px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  color: var(--color-cream);
+  font-weight: lighter;
+  background-color: var(--color-dark-background);
+  transition: border-color 0.2s ease-in-out;
+}
+.searchButton:hover {
+  border-color: var(--color-secondary);
 }
 
-/* About Section */
 .about {
   margin-top: 4rem;
   text-align: center;
@@ -129,7 +208,6 @@ body {
   line-height: 1.6;
 }
 
-/* Footer */
 .footer {
   background-color: var(--color-secondary);
   color: var(--color-cream);
@@ -140,102 +218,4 @@ body {
 
 .footer p {
   font-size: 1rem;
-}
-
-/* Book Grid */
-.bookGrid {
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 books per row */
-  gap: 1.5rem;
-  padding: 1rem;
-  max-width: 1400px; /* Optional, for centering and nice wide layout */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (max-width: 1200px) {
-  .bookGrid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .bookGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .bookGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 400px) {
-  .bookGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.bookCard {
-  background-color: var(--color-cream);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.bookCard:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.bookCover {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(139, 94, 60, 0.3);
-  margin-bottom: 1rem;
-  object-fit: cover;
-  max-height: 250px;
-}
-
-.bookTitle {
-  font-family: var(--font-title);
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-primary);
-}
-
-.bookAuthor {
-  font-size: 0.95rem;
-  color: var(--color-light-text);
-  margin-bottom: 0.25rem;
-}
-
-.bookYear {
-  font-size: 0.85rem;
-  color: var(--color-light-text);
-  margin-bottom: 1rem;
-}
-
-.viewButton {
-  background-color: var(--color-accent);
-  color: var(--color-cream);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(209, 161, 94, 0.5);
-  transition: background-color 0.3s ease;
-}
-
-.viewButton:hover {
-  background-color: var(--color-primary);
-  box-shadow: 0 4px 12px rgba(139, 94, 60, 0.7);
 }
