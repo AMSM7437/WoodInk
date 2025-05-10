@@ -60,10 +60,9 @@
   outline: none;
   appearance: unset;
 }
-
 body {
   font-family: var(--font-body);
-  background-color: var(--color-background);
+  background-color: var(--color-background)asd;
   color: var(--color-text);
   line-height: 1.6;
 }
@@ -73,6 +72,7 @@ body {
   position: relative;
   flex-direction: column;
   min-height: 100dvh;
+
   min-width: 100dvw;
 }
 .app::before {
@@ -122,7 +122,7 @@ body {
 
 .main {
   flex: 1;
-  padding: 2rem;
+  /* padding: 2rem; */
   background-color: rgba(255, 244, 230, 0);
   border-radius: 12px;
   /* margin: 2rem; */
@@ -135,6 +135,7 @@ body {
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin:0rem 2rem;
 }
 
 .hero h2 {
@@ -213,7 +214,7 @@ body {
   color: var(--color-cream);
   text-align: center;
   padding: 1rem;
-  margin-top: 2rem;
+
 }
 
 .footer p {

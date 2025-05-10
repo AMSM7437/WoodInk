@@ -35,7 +35,7 @@ export const Homepage = () => {
     // when the audio metadata is loaded, set volume to 30%
     const audioEl = audioRef.current;
     const onLoaded = () => {
-      audioEl.volume = 0.05; // 30% volume
+      audioEl.volume = 1; // 30% volume
     };
 
     audioEl.addEventListener("loadedmetadata", onLoaded);
